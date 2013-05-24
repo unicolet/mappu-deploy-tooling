@@ -1,0 +1,94 @@
+#===========================================================================
+# allowed DPIs
+#===========================================================================
+dpis:
+  - 254
+  - 190
+  - 127
+  - 56
+
+#===========================================================================
+# allowed Formats
+#===========================================================================
+# '*' means any formats
+formats: ['*']
+
+#===========================================================================
+# the allowed scales
+#===========================================================================
+scales:
+  - 2000
+  - 5000
+  - 10000
+  - 25000
+  - 50000
+  - 100000
+  - 200000
+  - 500000
+  - 1000000
+  - 2000000
+  - 4000000
+  - 8000000
+  - 16000000
+  - 32000000
+  - 64000000
+
+#===========================================================================
+# the list of allowed hosts
+#===========================================================================
+hosts:
+  - !localMatch
+    dummy: true
+  - !ipMatch
+    ip: www.camptocamp.org
+  - !dnsMatch
+    host: labs.metacarta.com
+    port: 80
+  - !dnsMatch
+    host: demo.mapfish.org
+    port: 80
+  - !dnsMatch
+    host: maps.google.com
+    port: 80
+
+# the default fileName for the files downloaded from the servlet
+outputFilename: Mappu_PrintOut
+
+layouts:
+  #===========================================================================
+  A4 landscape:
+  #===========================================================================
+    mainPage:
+      rotation: true
+      landscape: true
+      pageSize: A4
+      header:
+        height: 50
+        items:
+          - !text
+            font: Helvetica
+            fontSize: 30
+            align: left
+            text: '${mapTitle}'
+      items:
+        - !map
+          width: 760 
+          height: 400
+        - !text
+          text: '${comment}'
+          spacingAfter: 30
+      footer:
+        height: 30
+        items:
+          - !columns
+            items:
+              - !text
+                fontSize: 8 
+                fontColor: #9C9C9C
+                align: left
+                text: 'Mappu web gis ${now yyyy.MM.dd hh:mm aaa}'
+              - !scalebar
+                maxSize: 150
+                align: right
+
+

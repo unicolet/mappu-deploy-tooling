@@ -1,0 +1,15 @@
+[mappu]
+name=Mappu repo
+{% if 'x86_64' == grains['cpuarch'] %}
+#baseurl=https://s3.amazonaws.com/s3-mappu/mappu/x86_64/
+baseurl=http://10.1.24.101/mappu/x86_64/
+{% else %}
+#baseurl=https://s3.amazonaws.com/s3-mappu/mappu/i386/
+baseurl=http://10.1.24.101/mappu/i386/
+{% endif %}
+enabled=1
+gpgcheck=0
+
+# expire metadata after this many seconds
+metadata_expire=1
+
