@@ -4,9 +4,9 @@ var WMSCONFIG={
 {%else%}
 	use_cache:true,
 {% endif %}
-	server_path:"/geoserver/wms",
-	wfs_server_path:"/geoserver/wfs",
-	server_cache_path:"/geoserver/gwc/service/wms",
+	server_path: {{- ctx_server_path -}},
+	wfs_server_path: {{- ctx_wfs_server_path -}},
+	server_cache_path: {{- ctx_server_cache_path -}},
 {% if ctx_default_srs is defined %}
 	default_srs:{{- ctx_default_srs -}},
 {%else%}
