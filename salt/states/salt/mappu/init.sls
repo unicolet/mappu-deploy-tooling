@@ -15,7 +15,6 @@ mappu-pkgs:
        - mappu-ui
        - mappu-print
      - require:
-       - file: /etc/yum.repos.d/mappu.repo
        - pkg: other-mappu-packages
 
 # the presence of this file instructs web apps rpm scripts
@@ -33,6 +32,7 @@ other-mappu-packages:
         - geoserver
         - make
       - require:
+        - file: /etc/yum.repos.d/mappu.repo
         - file: /var/tmp/no-tomcat-restart
 
 # if we update any of tomcat apps/packages, restart tomcat to avoid mem leaks

@@ -78,6 +78,14 @@ db_{{- application.name -}}:
      - require:
        - postgres_user: pg_{{ application.name }}
 
+/var/www/html/assets_{{- application.name -}}:
+   file.directory:
+     - user: root
+     - group: root
+     - dir_mode: 755
+     - file_mode: 644
+     - makedirs: True
+
 /var/www/html/assets_{{- application.name -}}/appconfig.js:
    file.managed:
      - source: salt://mappu/appconfig.js
@@ -88,6 +96,8 @@ db_{{- application.name -}}:
      - template: jinja
      - context:{% for k in application %}
        ctx_{{k}}: {{ application.get(k) }}{% endfor %}
+     - require:
+       - file: /var/www/html/assets_{{- application.name -}}
 
 
 {% endfor %}
