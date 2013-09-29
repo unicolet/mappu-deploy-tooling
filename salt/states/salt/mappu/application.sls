@@ -8,6 +8,8 @@
      - group: root
      - mode: 644
      - template: jinja
+     - require:
+       - pkg: nginx
      - watch_in: 
        - service: nginx
 
@@ -15,6 +17,8 @@
    file.rename:
      - source: /etc/nginx/conf.d/default.conf
      - force: true
+     - require:
+       - pkg: nginx
      - watch_in:
        - service: nginx
 
@@ -33,6 +37,9 @@
      - require:
        - pkg: mappu-pkgs
        - file: /var/www/html/assets_{{- application.name }}/appconfig.js
+       - postgres_database: db_{{- application.name }}
+       - service: redis
+       - pkg: nodejs
 
 #
 # until salt support upstart on centos this will have to stay commented
