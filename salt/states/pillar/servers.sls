@@ -1,2 +1,2 @@
-appserver: *
-dbserver : *
+appserver: '*'
+dbserver : '*'
