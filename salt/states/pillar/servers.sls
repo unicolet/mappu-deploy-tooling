@@ -1,2 +1,2 @@
-appserver: localhost.localdomain
-dbserver : localhost.localdomain
+appserver: *
+dbserver : *

@@ -1,14 +1,14 @@
 base:
   '*':
-{% if pillar['appserver'] == grains['id'] %}
+{% if pillar['appserver'] == grains['id'] or '*' == pillar['appserver'] %}
     - nginx
     - redis
     - nodejs 
     - mappu 
+    - mappu.application
 {% endif %}
-{% if pillar['dbserver'] == grains['id'] %}
+{% if pillar['dbserver'] == grains['id']or '*' == pillar['dbserver']  %}
     - postgres
 {% endif %}
-    - mappu.application
     - firewall
 
