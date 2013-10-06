@@ -35,8 +35,13 @@ var APPCONFIG={
 	admin_user:"admin",
 	advanced_options:"/mapsocial/",
 {% if ctx_show_tips is defined %}
-	showTips:{{- ctx_show_tips -}}
+	showTips:{{- ctx_show_tips -}},
 {%else%}
-	showTips:false
+	showTips:false,
+{%endif%}
+{% if ctx_enable_printing is defined %}
+	enablePrinting:{{- ctx_enable_printing -}}
+{%else%}
+	enablePrinting:true
 {%endif%}
 };
