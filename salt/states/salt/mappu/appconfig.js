@@ -40,7 +40,7 @@ var APPCONFIG={
 	showTips:false,
 {%endif%}
 {% if ctx_enable_printing is defined %}
-	enablePrinting:{{- ctx_enable_printing -}}
+	enablePrinting:{{- ctx_enable_printing|lower -}}
 {%else%}
 	enablePrinting:true
 {%endif%}

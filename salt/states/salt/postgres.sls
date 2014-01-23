@@ -38,6 +38,8 @@ postgresql92-server:
    cmd.wait:
     - watch:
       - pkg: postgresql92-server
+    - require:
+      - pkg: postgresql92-server
 
 /var/lib/pgsql/9.2/data/pg_hba.conf:
    file.managed:
@@ -46,9 +48,13 @@ postgresql92-server:
      - group: postgres
      - mode: 600
      - template: jinja
+     - require:
+       - cmd: /etc/init.d/postgresql-9.2 initdb
 
 /var/lib/pgsql/9.2/data/postgresql.conf:
    file.sed:
      - before: "#listen_addresses = 'localhost'"
      - after: "listen_addresses = '*'"
+     - require:
+       - cmd: /etc/init.d/postgresql-9.2 initdb
  
