@@ -30,10 +30,8 @@ postgresql92-server:
      - running
      - require:
        - pkg: postgresql92-server
-       - cmd: postgres_initdb
-       - file: /var/lib/pgsql/9.2/data/pg_hba.conf
-       - file: /var/lib/pgsql/9.2/data/postgresql.conf
      - watch:
+       - cmd: postgres_initdb
        - file: /var/lib/pgsql/9.2/data/pg_hba.conf
        - file: /var/lib/pgsql/9.2/data/postgresql.conf
 
