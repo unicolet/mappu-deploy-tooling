@@ -1,11 +1,17 @@
 [mappu]
 name=Mappu repo
 {% if 'x86_64' == grains['cpuarch'] %}
+{% if 'unstable' == pillar.get('mappu_version') %}
+baseurl=http://testing.mappu.org/mappu/x86_64/
+{% else %}
 baseurl=https://s3.amazonaws.com/s3-mappu/mappu/x86_64/
-#baseurl=http://testing.mappu.org/mappu/x86_64/
+{% endif %}
+{% else %}
+{% if 'unstable' == pillar.get('mappu_version') %}
+baseurl=http://testing.mappu.org/mappu/i386/
 {% else %}
 baseurl=https://s3.amazonaws.com/s3-mappu/mappu/i386/
-#baseurl=http://testing.mappu.org/mappu/i386/
+{% endif %}
 {% endif %}
 enabled=1
 gpgcheck=0
