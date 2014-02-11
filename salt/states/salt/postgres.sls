@@ -29,16 +29,17 @@ postgresql92-server:
      - name: postgresql-9.2
      - running
      - require:
-       - pkg: postgresql92-server
-     - watch:
        - cmd: postgres_initdb
+       - file: /var/lib/pgsql/9.2/data/pg_hba.conf
+       - file: /var/lib/pgsql/9.2/data/postgresql.conf
+     - watch:
        - file: /var/lib/pgsql/9.2/data/pg_hba.conf
        - file: /var/lib/pgsql/9.2/data/postgresql.conf
 
 postgres_initdb:
    cmd.run:
     - name: service postgresql-9.2 initdb
-    - unless: /bin/ls /var/lib/pgsql/9.2/data/
+    - unless: /bin/ls /var/lib/pgsql/9.2/data
     - require:
       - pkg: postgresql92-server
 
