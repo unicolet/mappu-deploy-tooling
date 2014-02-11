@@ -39,7 +39,7 @@ postgresql92-server:
 postgres_initdb:
    cmd.run:
     - name: service postgresql-9.2 initdb
-    - unless: /bin/ls /var/lib/pgsql/9.2/data
+    - unless: /bin/ls /var/lib/pgsql/9.2/data/PG_VERSION
     - require:
       - pkg: postgresql92-server
 
