@@ -1,3 +1,4 @@
+{% if '0.14' == grains['saltversion'][0:4] %}
 postgres92-repo:
    file.managed:
      - name: /etc/yum.repos.d/pgdg-92-centos.repo
@@ -6,25 +7,30 @@ postgres92-repo:
      - group: root
      - mode: 644
      - template: jinja
-     
+{% else %}
 #
 # Salt 0.14 has bug for which pgrepo does not work correctly for
 # yum repositories, working around it with file.managed
 #
-#  pkgrepo.managed:
-#    - name: pgdg-92-centos 
-#    - humanname: pgdg-92-centos 
-#    - mirrorlist:
-#    - baseurl: http://yum.postgresql.org/9.2/redhat/rhel-$releasever-$basearch
-#    - gpgcheck: 1
-#    - gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-92
-
+postgres92-repo:
+   pkgrepo.managed:
+     - name: pgdg-92-centos
+     - humanname: pgdg-92-centos
+     - baseurl: http://yum.postgresql.org/9.2/redhat/rhel-$releasever-$basearch
+     - gpgcheck: 0
+{% endif %}
 
 postgresql92-server:
    pkg:
      - installed
-     - require:
+     - refresh: True
+     - fromrepo: pgdg-92-centos
+     - require
+{% if '0.14' == grains['saltversion'][0:4] %}
        - file: /etc/yum.repos.d/pgdg-92-centos.repo
+{% else %}
+       - pkgrepo: pgdg-92-centos
+{% endif %}
    service:
      - name: postgresql-9.2
      - running

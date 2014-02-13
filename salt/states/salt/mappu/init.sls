@@ -9,6 +9,7 @@ mappu:
 
 mappu-pkgs:
    pkg.latest:
+     - refresh: True
      - fromrepo: mappu
      - pkgs:
        - mappu-backend
@@ -24,6 +25,7 @@ mappu-pkgs:
 
 other-mappu-packages:
    pkg.installed:
+      - refresh: True
       - pkgs:
         - jdk
         - java-jai
