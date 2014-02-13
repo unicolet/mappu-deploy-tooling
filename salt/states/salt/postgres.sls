@@ -25,7 +25,7 @@ postgresql92-server:
      - installed
      - refresh: True
      - fromrepo: pgdg-92-centos
-     - require
+     - require:
 {% if '0.14' == grains['saltversion'][0:4] %}
        - file: /etc/yum.repos.d/pgdg-92-centos.repo
 {% else %}
