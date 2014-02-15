@@ -74,16 +74,23 @@ DB_USER="pg_{{- application.name -}}" DB_PASSWORD="{{- application.dbpassword -}
 
 # database user
 pg_{{- application.name -}}:
-   postgres_user.present:
-     - password: {{ application.dbpassword }}
-     - require:
-       - service: postgresql-9.2
+    cmd.run:
+      - name: /usr/bin/psql --no-align --no-readline --dbname postgres -c "CREATE USER {{ application.name }} WITH PASSWORD '{{ appl
+      - user: postgres
+      - require:
+        - service: postgresql-9.2
+# workaround for https://github.com/saltstack/salt/issues/9516 and a series of other issues with postgres_user
+# search github for a looong list :-(
+#   postgres_user.present:
+#     - password: {{ application.dbpassword }}
+#    - require:
+#       - service: postgresql-9.2
 
 db_{{- application.name -}}:
    postgres_database.present:
      - owner: pg_{{ application.name }}
      - require:
-       - postgres_user: pg_{{ application.name }}
+       - cmd: pg_{{ application.name }}
 
 /var/www/html/assets_{{- application.name -}}:
    file.directory:
