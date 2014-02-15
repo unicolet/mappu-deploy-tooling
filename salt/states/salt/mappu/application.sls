@@ -75,7 +75,7 @@ DB_USER="pg_{{- application.name -}}" DB_PASSWORD="{{- application.dbpassword -}
 # database user
 pg_{{- application.name -}}:
     cmd.run:
-      - name: /usr/bin/psql --no-align --no-readline --dbname postgres -c "CREATE USER {{ application.name }} WITH PASSWORD '{{ application.dbpassword }}'" || /bin/true
+      - name: /usr/bin/psql --no-align --no-readline --dbname postgres -c "CREATE USER pg_{{- application.name }} WITH PASSWORD '{{ application.dbpassword }}'" || /bin/true
       - user: postgres
       - require:
         - service: postgresql-9.2
