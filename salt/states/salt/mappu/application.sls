@@ -41,24 +41,14 @@
        - service: redis
        - pkg: nodejs
 
-#
-# until salt support upstart on centos this will have to stay commented
-# btw, it should work when salt reaches 14.1, see https://github.com/saltstack/salt/commit/733dbc1e67685d42a769c88769c9fa1c7107aedc
-#
-#node_{{- application.name -}}:
-#   service:
-#     - running
-#     - require:
-#       - file: /etc/init/node_{{- application.name -}}.conf
-#     - watch:
-#       - file: /etc/init/node_{{- application.name -}}.conf
-
+{% if not pillar.get('docker',False) %}
 stop node_{{- application.name -}}; start node_{{- application.name -}}:
    cmd:
      - wait
      - watch:
        - file: /etc/init/node_{{- application.name -}}.conf
        - pkg: mappu-pkgs
+{% endif %}
 
 # update application db schema on package changes
 DB_USER="pg_{{- application.name -}}" DB_PASSWORD="{{- application.dbpassword -}}" DB_NAME="db_{{- application.name -}}" DB_HOST="localhost" /usr/bin/make -C /opt/mapsocial -f /opt/mapsocial/Makefile liquibase_prod:
