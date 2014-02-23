@@ -10,7 +10,7 @@ base:
 {% if pillar['dbserver'] == grains['id']or '*' == pillar['dbserver']  %}
     - postgres
 {% endif %}
-{% if pillar.get('docker',False) %}
+{% if not pillar.get('docker',False) %}
     - firewall
 {% endif %}
 

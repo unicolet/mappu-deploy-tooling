@@ -48,6 +48,24 @@ stop node_{{- application.name -}}; start node_{{- application.name -}}:
      - watch:
        - file: /etc/init/node_{{- application.name -}}.conf
        - pkg: mappu-pkgs
+{% else %}
+# docker entry point
+/opt/mapsocial/run.sh:
+   file:
+     - managed
+     - source: salt://mappu/run.sh
+     - user: root
+     - group: root
+     - mode: 644
+     - template: jinja
+     - context:{% for k in application %}
+       ctx_{{k}}: {{ application.get(k) }}{% endfor %}
+     - require:
+       - pkg: mappu-pkgs
+       - file: /var/www/html/assets_{{- application.name }}/appconfig.js
+       - postgres_database: db_{{- application.name }}
+       - service: redis
+       - pkg: nodejs
 {% endif %}
 
 # update application db schema on package changes
