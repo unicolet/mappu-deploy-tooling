@@ -56,7 +56,7 @@ stop node_{{- application.name -}}; start node_{{- application.name -}}:
      - source: salt://mappu/run.sh
      - user: root
      - group: root
-     - mode: 644
+     - mode: 750
      - template: jinja
      - context:{% for k in application %}
        ctx_{{k}}: {{ application.get(k) }}{% endfor %}
