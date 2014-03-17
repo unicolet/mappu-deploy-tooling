@@ -8,7 +8,7 @@ MAINTAINER Umberto Nicoletti
 # due to missing upstart and firewall
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network && \
     test -f /etc/yum.repos.d/epel.repo || /bin/rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
-    /usr/bin/yum -y install --enable-repo=epel-testing git salt-minion && \
+    /usr/bin/yum -y install --enablerepo=epel-testing git salt-minion && \
     cd / && \
     /usr/bin/git clone https://github.com/unicolet/mappu-deploy-tooling.git && \
     echo "Linking minion.conf" && \
