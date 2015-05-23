@@ -8,7 +8,7 @@ MAINTAINER Umberto Nicoletti
 # due to missing upstart and firewall
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network && \
     test -f /etc/yum.repos.d/epel.repo || /bin/rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
-    /usr/bin/yum -y install git && \
+    /usr/bin/yum -y install git which && \
     echo "Installing salt/develop" && \
     curl -L https://github.com/saltstack/salt-bootstrap/raw/stable/bootstrap-salt.sh | sed "s/__check_services_upstart salt-\$fname || return 1/__check_services_upstart salt-\$fname || return 0/" | sh -s -- -X git develop && \
     cd / && \
