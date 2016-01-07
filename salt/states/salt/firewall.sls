@@ -7,7 +7,7 @@ firewall:
 
 # enable http, postgres and ssh
 /etc/sysconfig/iptables:
-  file.sed:
-    - before: tcp -p tcp --dport 22
-    - after: multiport -p tcp --dports 22,80,5432
-    - limit: ^-A INPUT -m state --state NEW -m
+  file.replace:
+    - pattern: tcp -p tcp --dport 22
+    - repl: multiport -p tcp --dports 22,80,5432
+    - count: 1

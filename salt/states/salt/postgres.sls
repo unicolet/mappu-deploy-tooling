@@ -60,9 +60,10 @@ postgres_initdb:
        - cmd: postgres_initdb
 
 /var/lib/pgsql/9.2/data/postgresql.conf:
-   file.sed:
-     - before: "#listen_addresses = 'localhost'"
-     - after: "listen_addresses = '*'"
+   file.replace:
+     - pattern: "#listen_addresses = 'localhost'"
+     - repl: "listen_addresses = '*'"
+     - count: 1
      - require:
        - cmd: postgres_initdb
 
