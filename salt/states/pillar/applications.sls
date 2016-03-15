@@ -10,6 +10,8 @@ applications:
      wfs_server_path: "/geoserver/wfs"
      server_cache_path: "/geoserver/gwc/service/wms"
      enable_printing: "true"
+     custom_app_logo: "/source/recources/images/app-logo-huge.png"
+     attribution: "mailto:umberto.nicoletti@gmail.com"
 # example of a custom reverse proxy, geoserver is proxied by default
      extra_reverse_proxies:
        /ms-ng/ : http://localhost:8080/ms-ng/

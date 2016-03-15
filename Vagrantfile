@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "centos6"
+  config.vm.box = "geerlingguy/centos6"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -42,16 +42,7 @@ Vagrant::Config.run do |config|
   ## Use all the defaults:
   config.vm.provision :salt do |salt|
     salt.run_highstate = true
-
-    ## Optional Settings:
-    salt.minion_config = "salt/minion.conf"
-    # salt.temp_config_dir = "/existing/folder/on/basebox/"
-    # salt.salt_install_type = "git"
-    # salt.salt_install_args = "develop"
-
-    ## If you have a remote master setup, you can add
-    ## your preseeded minion key
-    # salt.minion_key = "salt/key/minion.pem"
-    # salt.minion_pub = "salt/key/minion.pub"
+    salt.masterless = true
+    #salt.minion_config = "salt/minion.conf"
   end
 end

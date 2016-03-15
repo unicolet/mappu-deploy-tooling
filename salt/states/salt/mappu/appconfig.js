@@ -45,9 +45,19 @@ var APPCONFIG={
 	enablePrinting:true,
 {%endif%}
 {% if ctx_enable_session_saving is defined %}
-        enableSessionSaving: {{- ctx_enable_session_saving|lower -}}
+        enableSessionSaving: {{- ctx_enable_session_saving|lower -}},
 {%else%}
-	enableSessionSaving:false
+	enableSessionSaving:false,
+{%endif%}
+{% if ctx_custom_app_logo is defined %}
+        custom_app_logo: "{{- ctx_custom_app_logo -}}",
+{% else %}
+        custom_app_logo: "/source/recources/images/app-logo-huge.png",
+{%endif%}
+ {% if ctx_attribution is defined %}
+        attribution: "{{- ctx_attribution -}}"
+{%else%}
+        attribution: "mailto:umberto.nicoletti@gmail.com"
 {%endif%}
 };
 
