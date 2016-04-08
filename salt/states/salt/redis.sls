@@ -3,5 +3,6 @@ redis:
      - installed
    service:
      - running
+     - enable: True
      - require:
        - pkg: redis

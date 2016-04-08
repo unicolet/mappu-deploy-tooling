@@ -46,6 +46,7 @@ other-mappu-packages:
 tomcat7:
    service:
      - running
+     - enable: True
      - require:
        - pkg: other-mappu-packages
 

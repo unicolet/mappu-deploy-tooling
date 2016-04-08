@@ -34,6 +34,7 @@ postgresql92-server:
    service:
      - name: postgresql-9.2
      - running
+     - enable: True
      - require:
        - cmd: postgres_initdb
        - file: /var/lib/pgsql/9.2/data/pg_hba.conf
