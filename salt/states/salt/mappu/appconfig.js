@@ -13,7 +13,7 @@ var WMSCONFIG={
 	default_srs:"EPSG:3003",
 {%endif%}
 {% if ctx_extended_link_regex is defined %}
-	extended_link_regex:{{- ctx_extended_link_regex -}},
+	extended_link_regex:{{- ctx_extended_link_regex|lower -}},
 {%else%}
 	extended_link_regex:true,
 {%endif%}
